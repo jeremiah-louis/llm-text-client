@@ -68,9 +68,6 @@ export function MarkdownPreview({ markdown }: MarkdownPreviewProps) {
           </pre>
         </div>
       </div>
-      <div className="mt-4 text-center text-sm text-zinc-500 dark:text-zinc-400">
-        Powered by <a href="https://wetrocloud.com" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">WetroCloud</a>
-      </div>
     </div>
   )
 } 

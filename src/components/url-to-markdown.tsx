@@ -89,52 +89,58 @@ export function UrlToMarkdown() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-4 sm:space-y-6 px-4 sm:px-6">
-      <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-md mx-auto items-center gap-2 sm:gap-3">
-        <div className="relative w-full">
-          <Input
-            type="url"
-            placeholder="https://example.com"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            required
-            className="flex-1 w-full h-10 sm:h-12 text-base sm:text-lg rounded-lg sm:rounded-xl"
-          />
-        </div>
-        <Button 
-          type="submit" 
-          disabled={isLoading}
-          className="w-full h-10 sm:h-12 text-base sm:text-lg rounded-lg sm:rounded-xl bg-zinc-900 hover:bg-zinc-800"
-        >
-          {isLoading ? 'Generating...' : 'Start for free'}
-        </Button>
-      </form>
-
-      {error && (
-        <div className="text-red-500 rounded-lg border border-red-200 p-3 sm:p-4 bg-red-50 dark:bg-red-950 dark:border-red-800">
-          <p className="text-sm sm:text-base font-medium">{error}</p>
-        </div>
-      )}
-
-      {isLoading && (
-        <div className="space-y-3 sm:space-y-4">
-          <h2 className="text-lg sm:text-xl font-semibold">Generating Markdown...</h2>
-          <div className="w-full p-4 sm:p-8 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900">
-            <div className="space-y-2 sm:space-y-3">
-              <Skeleton className="h-3 sm:h-4 w-3/4" />
-              <Skeleton className="h-3 sm:h-4 w-full" />
-              <Skeleton className="h-3 sm:h-4 w-2/3" />
-              <Skeleton className="h-3 sm:h-4 w-full" />
-              <Skeleton className="h-3 sm:h-4 w-5/6" />
-            </div>
+    <div className="w-full max-w-3xl mx-auto">
+      {/* Input Form */}
+      <div className="w-full max-w-xl mx-auto px-4 sm:px-6">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+          <div className="flex-1">
+            <Input
+              type="url"
+              placeholder="https://example.com"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              required
+              className="w-full h-12 sm:h-14 text-base sm:text-lg rounded-2xl border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900"
+            />
           </div>
-        </div>
-      )}
+          <Button 
+            type="submit" 
+            disabled={isLoading}
+            className="h-12 sm:h-14 px-8 text-base sm:text-lg font-medium rounded-2xl bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors"
+          >
+            {isLoading ? 'Generating...' : 'Generate 🫧'}
+          </Button>
+        </form>
 
-      {!isLoading && markdown && (
-        <div className="space-y-3 sm:space-y-4">
-          <h2 className="text-lg sm:text-xl font-semibold">Generated Markdown</h2>
-          <MarkdownPreview markdown={markdown} />
+        {error && (
+          <div className="mt-4 text-red-500 rounded-xl border border-red-200 p-4 bg-red-50 dark:bg-red-950/50 dark:border-red-800">
+            <p className="text-sm sm:text-base font-medium">{error}</p>
+          </div>
+        )}
+      </div>
+
+      {/* Results */}
+      {(isLoading || markdown) && (
+        <div className="mt-12 sm:mt-16 border-t border-zinc-200 dark:border-zinc-800 pt-8 sm:pt-10">
+          {isLoading ? (
+            <div className="space-y-4 px-4 sm:px-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-center">Generating Markdown...</h2>
+              <div className="w-full p-6 sm:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
+                <div className="space-y-3">
+                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-2/3" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <h2 className="text-lg sm:text-xl font-semibold text-center px-4">Generated Markdown</h2>
+              <MarkdownPreview markdown={markdown} />
+            </div>
+          )}
         </div>
       )}
     </div>
