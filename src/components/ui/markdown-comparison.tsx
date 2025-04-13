@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { GripHorizontal } from "lucide-react"
 import { motion, AnimatePresence, useSpring } from "framer-motion"
 
