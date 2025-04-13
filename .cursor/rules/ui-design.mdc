@@ -1,0 +1,55 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project: LLMs.txt Generator
+
+## Frontend (Next.js + TailwindCSS)
+
+### UI Setup
+- [x] Setup a basic Next.js app with TailwindCSS.
+- [ ] Create a landing page with:
+  - [ ] H1 (Shadcn Typography) saying Turn any website into markdown
+  - [ ] Add a subheadline after the Headline
+  - [ ] Centered input field to paste a URL.
+  - [ ] A Submit button to generate Markdown.
+- [ ] Show a loading spinner or skeleton when waiting for the response.
+
+### API Integration
+- [ ] Create a client-side function to POST the URL to `/generate-md`.
+- [ ] Handle and display the markdown response.
+- [ ] This is the API endpoint request example:
+```
+    curl -X POST "https://llms-txt-server.vercel.app/generate-md" \
+     -H "Content-Type: application/json" \
+     -d '{"url": "https://wetrocloud.com"}'
+```
+
+### Markdown Viewer
+- [ ] Create a two-layered Markdown Previewer component:
+  - [ ] One layer displays raw markdown text.
+  - [ ] Second layer renders the markdown (use `react-markdown` package).
+- [ ] Build a draggable slider component to reveal either side (inspired by before/after image slider).
+- [ ] Make slider responsive for desktop and mobile.
+
+### UX Enhancements (Optional)
+- [ ] Add a Copy to Clipboard button for the generated Markdown.
+- [ ] Add Light/Dark mode toggle.
+- [ ] Display Toast Notifications for:
+  - [ ] Success
+  - [ ] Errors (e.g., invalid URL, backend issues).
+
+## Deployment
+- [ ] Deploy FastAPI backend (e.g., on Render, Railway, or Vercel Serverless).
+- [ ] Deploy Next.js frontend (e.g., Vercel, Netlify).
+- [ ] Connect frontend to backend deployed URL.
+
+## Polish
+- [ ] Add meta tags (SEO-friendly).
+- [ ] Add favicon and nice title for the app.
+
+## Final Testing
+- [ ] Test with multiple websites (static and dynamic ones).
+- [ ] Confirm slider works smoothly.
+- [ ] Confirm raw/rendered markdown displays properly.
