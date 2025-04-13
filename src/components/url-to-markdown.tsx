@@ -89,26 +89,24 @@ export function UrlToMarkdown() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto relative z-10">
+    <div className="w-full max-w-3xl mx-auto">
       {/* Input Form */}
       <div className="w-full max-w-xl mx-auto px-4 sm:px-6">
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-          <div className="flex-1 relative">
+          <div className="flex-1">
             <Input
-              type="url"
-              inputMode="url"
+              type="text"
               placeholder="https://example.com"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               required
-              className="w-full h-12 sm:h-14 text-base sm:text-lg rounded-2xl border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 touch-manipulation"
-              style={{ WebkitAppearance: 'none' }}
+              className="w-full h-12 sm:h-14 text-base sm:text-lg rounded-xl border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900"
             />
           </div>
           <Button 
             type="submit" 
             disabled={isLoading}
-            className="h-12 sm:h-14 px-8 text-base sm:text-lg font-medium rounded-2xl bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors"
+            className="h-12 sm:h-14 px-8 text-base sm:text-lg font-medium rounded-xl bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors"
           >
             {isLoading ? 'Generating...' : 'Generate 🫧'}
           </Button>
