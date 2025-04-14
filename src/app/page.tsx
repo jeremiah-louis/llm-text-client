@@ -1,5 +1,6 @@
 import { Tiles } from "@/components/ui/tiles"
 import { UrlToMarkdown } from "@/components/url-to-markdown"
+import { ThemeToggle } from "@/components/theme-toggle"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -8,52 +9,57 @@ export default function Home() {
     <main className="relative min-h-screen flex flex-col items-center">
       {/* Background */}
       <div className="fixed inset-0 -z-10">
-        {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-zinc-950" /> */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 to-transparent dark:from-zinc-950/50 dark:to-transparent" />
         <Tiles 
-          className="absolute inset-0 opacity-75"
+          className="absolute inset-0 opacity-75 dark:opacity-75"
           rows={10}
           cols={10}
           tileSize="lg"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/50 dark:to-black/50" />
-        {/* <div className="absolute inset-0 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-[1px]" /> */}
       </div>
 
       {/* Header */}
       <header className="w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link 
             href="https://wetrocloud.com" 
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center space-x-2 hover:opacity-80 transition-opacity"
           >
-            <Image
-              src="/Logo-wetrocloud.svg"
-              alt="Wetrocloud"
-              width={32}
-              height={32}
-              className="w-8 h-8"
-            />
-            <span className="text-lg font-semibold">
+            <div className="relative w-8 h-8">
+              <Image
+                src="/Logo-wetrocloud.svg"
+                alt="Wetrocloud"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <span className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-zinc-800 to-zinc-600 dark:from-zinc-200 dark:to-zinc-400">
               Wetrocloud
             </span>
           </Link>
+          
+          <ThemeToggle />
         </div>
       </header>
 
       {/* Content */}
       <div className="flex-1 flex flex-col w-full">
         {/* Hero Section */}
-        <section className="flex-1 flex flex-col items-center justify-center pt-20 sm:pt-28 pb-12">
+        <section className="flex-1 flex flex-col items-center justify-center pt-12 sm:pt-20 pb-12">
           <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6 px-4 sm:px-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] sm:leading-[1.1]">
               Turn websites into{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400">
-                Markdown
+              <span className="relative">
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-600 blur-2xl opacity-20" />
+                <span className="relative bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400 dark:from-blue-400 dark:to-blue-600">
+                  Markdown
+                </span>
               </span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground/80 max-w-lg mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-lg mx-auto">
               Convert your website into clean Markdown, perfect for powering your LLM applications.
             </p>
           </div>
@@ -66,7 +72,23 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="py-6 px-4 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        Built with ❤️ by <a href="https://wetrocloud.com" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">Wetrocloud</a>
+          Powered by{" "}
+          <Link 
+            href="https://wetrocloud.com" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="inline-flex items-center font-medium hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+          >
+            <div className="relative w-4 h-4 mr-1">
+              <Image
+                src="/Logo-wetrocloud.svg"
+                alt="Wetrocloud"
+                fill
+                className="object-contain"
+              />
+            </div>
+            Wetrocloud
+          </Link>
         </footer>
       </div>
     </main>
