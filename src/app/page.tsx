@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen flex flex-col items-center">
+    <main className="relative min-h-screen flex flex-col">
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-white/50 to-transparent dark:from-zinc-950/50 dark:to-transparent" />
@@ -20,8 +20,8 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="w-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <header className="w-full py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           <Link 
             href="https://wetrocloud.com" 
             target="_blank"
@@ -45,11 +45,11 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Content */}
-      <div className="flex-1 flex flex-col w-full">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
         {/* Hero Section */}
-        <section className="flex-1 flex flex-col items-center justify-center pt-12 sm:pt-20 pb-12">
-          <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6 px-4 sm:px-6">
+        <section className="flex flex-col items-center justify-center py-8 sm:py-12">
+          <div className="max-w-3xl mx-auto text-center space-y-4 px-4 sm:px-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] sm:leading-[1.1]">
               Turn websites into{" "}
               <span className="relative">
@@ -65,13 +65,13 @@ export default function Home() {
           </div>
 
           {/* URL Input Section */}
-          <div className="w-full mt-12 sm:mt-16">
+          <div className="w-full mt-8 sm:mt-12">
             <UrlToMarkdown />
           </div>
         </section>
 
         {/* Footer */}
-        <footer className="py-6 px-4 text-center text-sm text-zinc-600 dark:text-zinc-400">
+        <footer className="py-4 px-4 text-center text-sm text-zinc-600 dark:text-zinc-400">
           Powered by{" "}
           <Link 
             href="https://wetrocloud.com" 
