@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     description: "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
     siteName: "Wetrocloud",
     images: [{
-      url: "/og-image.png",
+      url: "https://wetrocloud.com/meta-banner.jpg",
       width: 1200,
       height: 630,
       alt: "Wetrocloud URL to Markdown Converter",
@@ -107,6 +108,16 @@ export default function RootLayout({
         <link rel="mask-icon" href="/Logo-wetrocloud.svg" color="#000000" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+
+          {/* Twitter OG metadata */}
+          <meta property="twitter:title" content="URL to Markdown | Wetrocloud" />
+          <meta property="twitter:description" content="Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing." />
+          <meta property="twitter:image" content="https://wetrocloud.com/meta-banner.jpg" />
+          <meta name="twitter:image:summary_photo_image:src" content="https://wetrocloud.com/meta-banner.jpg"/>
+          <meta name="twitter:image:photo_image_full_size:src" content="https://wetrocloud.com/meta-banner.jpg"/>
+          <meta name="twitter:image:thumbnail_image:src" content="https://wetrocloud.com/meta-banner.jpg"/>
+          <meta name="twitter:card" content="summary_large_image"/>
+          <meta name="twitter:site" content="https://wetrocloud.com"/>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -131,6 +142,15 @@ export default function RootLayout({
             })
           }}
         />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-CP7XLD7HG1" strategy='lazyOnload' />
+        <Script id="google-analytics" strategy="lazyOnload">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-CP7XLD7HG1');
+              `}
+      </Script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider

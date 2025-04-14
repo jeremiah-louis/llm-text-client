@@ -84,10 +84,10 @@ export default function Home() {
                 src="/Logo-wetrocloud.svg"
                 alt="Wetrocloud"
                 fill
-                className="object-contain"
+                className="object-contain mt-1"
               />
             </div>
-            Wetrocloud
+            <span className="mt-2">Wetrocloud</span>
           </Link>
         </footer>
       </div>
