@@ -121,15 +121,32 @@ export function UrlToMarkdown() {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 required
-                className="w-full h-12 text-base bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-zinc-500 dark:focus:ring-zinc-400"
+                className="w-full h-12 text-base bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 rounded-lg focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
               />
             </div>
             <Button 
               type="submit" 
               disabled={isLoading}
-              className="w-full sm:w-auto h-12 px-6 text-base font-medium bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-lg transition-colors"
+              className={`
+                relative w-full sm:w-auto h-12 px-6 text-base font-medium rounded-lg
+                transition-all duration-200 ease-out
+                bg-gradient-to-r from-blue-600 to-blue-500
+                dark:from-blue-500 dark:to-blue-400
+                hover:from-blue-500 hover:to-blue-400
+                dark:hover:from-blue-400 dark:hover:to-blue-300
+                text-white dark:text-white
+                shadow-lg shadow-blue-500/20 dark:shadow-blue-400/20
+                hover:shadow-xl hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30
+                disabled:opacity-70 disabled:cursor-not-allowed
+                disabled:hover:shadow-lg disabled:hover:from-blue-600 disabled:hover:to-blue-500
+                dark:disabled:hover:from-blue-500 dark:disabled:hover:to-blue-400
+                overflow-hidden
+              `}
             >
-              {isLoading ? 'Generating...' : 'Generate 🫧'}
+              <span className="relative z-10">
+                {isLoading ? 'Generating...' : 'Generate 🫧'}
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-300 dark:from-blue-300 dark:to-blue-200 opacity-0 hover:opacity-20 transition-opacity duration-200" />
             </Button>
           </form>
 
