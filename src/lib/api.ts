@@ -42,5 +42,3 @@ export async function generateMarkdown(url: string): Promise<string> {
     throw new Error('Failed to generate markdown. Please try again. ');
   }
 }
-
-generateMarkdown('https://ucarecdn.com/cf5d9bf1-e114-4f8d-bef0-d272dbccea51/COMP3023102Cloudadoption1.pptx');

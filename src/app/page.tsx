@@ -9,8 +9,8 @@ export default function Home() {
         {/* <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-zinc-950" /> */}
         <Tiles 
           className="absolute inset-0 "
-          rows={200}
-          cols={200}
+          rows={10}
+          cols={10}
           tileSize="lg"
         />
         {/* <div className="absolute inset-0 bg-white/50 dark:bg-zinc-950/50 backdrop-blur-[1px]" /> */}
