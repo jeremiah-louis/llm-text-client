@@ -45,7 +45,7 @@ export default function Home() {
       {/* Content */}
       <div className="flex-1 flex flex-col w-full">
         {/* Hero Section */}
-        <section className="flex-1 flex flex-col items-center justify-center pt-12 sm:pt-20 pb-12">
+        <section className="flex-1 flex flex-col items-center justify-center pt-20 sm:pt-28 pb-12">
           <div className="max-w-3xl mx-auto text-center space-y-4 sm:space-y-6 px-4 sm:px-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] sm:leading-[1.1]">
               Turn websites into{" "}
@@ -66,22 +66,7 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="py-6 px-4 text-center text-sm text-zinc-600 dark:text-zinc-400">
-          Powered by{" "}
-          <Link 
-            href="https://wetrocloud.com" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="inline-flex items-center font-medium hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
-          >
-            <Image
-              src="/icon.svg"
-              alt="WetroCloud"
-              width={16}
-              height={16}
-              className="w-4 h-4 mr-1"
-            />
-            WetroCloud
-          </Link>
+        Built with ❤️ by <a href="https://wetrocloud.com" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">Wetrocloud</a>
         </footer>
       </div>
     </main>
