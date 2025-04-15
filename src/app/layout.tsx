@@ -32,16 +32,18 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/Logo-wetrocloud.svg", type: "image/svg+xml" },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+    ],
     other: [
       {
         rel: "mask-icon",
         url: "/Logo-wetrocloud.svg",
+        color: "#000000"
       },
       {
         rel: "android-chrome-192x192",
@@ -100,24 +102,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="canonical" href="https://wetrocloud.com" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="icon" type="image/svg+xml" href="/Logo-wetrocloud.svg" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="mask-icon" href="/Logo-wetrocloud.svg" color="#000000" />
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-
-          {/* Twitter OG metadata */}
-          <meta property="twitter:title" content="URL to Markdown | Wetrocloud" />
-          <meta property="twitter:description" content="Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing." />
-          <meta property="twitter:image" content="https://wetrocloud.com/meta-banner.jpg" />
-          <meta name="twitter:image:summary_photo_image:src" content="https://wetrocloud.com/meta-banner.jpg"/>
-          <meta name="twitter:image:photo_image_full_size:src" content="https://wetrocloud.com/meta-banner.jpg"/>
-          <meta name="twitter:image:thumbnail_image:src" content="https://wetrocloud.com/meta-banner.jpg"/>
-          <meta name="twitter:card" content="summary_large_image"/>
-          <meta name="twitter:site" content="https://wetrocloud.com"/>
+        {/* Twitter OG metadata */}
+        <meta property="twitter:title" content="URL to Markdown | Wetrocloud" />
+        <meta property="twitter:description" content="Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing." />
+        <meta property="twitter:image" content="https://wetrocloud.com/meta-banner.jpg" />
+        <meta name="twitter:image:summary_photo_image:src" content="https://wetrocloud.com/meta-banner.jpg"/>
+        <meta name="twitter:image:photo_image_full_size:src" content="https://wetrocloud.com/meta-banner.jpg"/>
+        <meta name="twitter:image:thumbnail_image:src" content="https://wetrocloud.com/meta-banner.jpg"/>
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:site" content="https://wetrocloud.com"/>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -150,7 +145,7 @@ export default function RootLayout({
               gtag('js', new Date());
               gtag('config', 'G-CP7XLD7HG1');
               `}
-      </Script>
+        </Script>
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
