@@ -1,24 +1,17 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-export async function generateMarkdown(url: string): Promise<string> {
-  if (!url) {
-    throw new Error('URL is required');
+export async function generateMarkdown(link: string): Promise<string> {
+  if (!link) {
+    throw new Error('Link is required');
   }
 
   try {
-    const { data } = await api.post('/generate-md', { url });
+    const { data } = await axios.post('/api/generate-md', { link });
 
-    if (!data || !data.markdown) {
+    if (!data.markdown) {
       throw new Error('Invalid response from server');
     }
-    console.log(data.markdown);
+    
     return data.markdown;
   } catch (error) {
     console.error('Error generating markdown:', error);
@@ -27,8 +20,8 @@ export async function generateMarkdown(url: string): Promise<string> {
       // Handle Axios specific errors
       if (error.response) {
         // The server responded with a status code outside of 2xx
-        const message = error.response.data?.message || error.message;
-        throw new Error(`Server error: ${message}`);
+        const message = error.response.data?.error || error.message;
+        throw new Error(message);
       } else if (error.request) {
         // The request was made but no response was received
         throw new Error('No response from server. Please check your internet connection.');
@@ -39,6 +32,6 @@ export async function generateMarkdown(url: string): Promise<string> {
     }
 
     // Handle non-Axios errors
-    throw new Error('Failed to generate markdown. Please try again. ');
+    throw new Error('Failed to generate markdown. Please try again.');
   }
 }
