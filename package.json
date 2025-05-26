@@ -15,7 +15,7 @@
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.6.5",
+    "framer-motion": "^12.12.2",
     "highlight.js": "^11.11.1",
     "lucide-react": "^0.488.0",
     "next": "15.3.0",
@@ -26,7 +26,7 @@
     "rehype-highlight": "^7.0.2",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
-    "shiki": "^3.2.2",
+    "shiki": "^3.4.2",
     "tailwind-merge": "^3.2.0",
     "tailwindcss-animate": "^1.0.7",
     "tw-animate-css": "^1.2.5"
