@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Hero } from "@/components/ui/animated-hero"
 import { CodeBlock, CodeBlockGroup, CodeBlockCode } from "@/components/ui/code-block"
-import Background from "@/components/ui/background"
+import Background from "@/components/background"
 
 export default function Home() {
   return (
