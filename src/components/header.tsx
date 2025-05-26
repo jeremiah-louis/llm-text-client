@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Header() {
   return (
@@ -24,7 +23,6 @@ export default function Header() {
             Wetrocloud
           </span>
         </Link>
-        <ThemeToggle />
       </div>
     </header>
   );

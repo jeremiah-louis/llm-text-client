@@ -28,8 +28,7 @@ export async function POST(request: Request) {
 
     // Attempt to locate the `json` key in different possible nesting levels.
     const jsonPayload =
-      // @ts-ignore – SDK typing is unknown; we defensively access optional chains.
-      response?.json || response?.data?.json || response?.response?.data?.json;
+      (response as any)?.json || (response as any)?.data?.json || (response as any)?.response?.data?.json;
 
     if (!jsonPayload) {
       return NextResponse.json(
