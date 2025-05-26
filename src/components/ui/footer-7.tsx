@@ -94,7 +94,8 @@ export const Footer7 = ({
                   src={logo.src}
                   alt={logo.alt}
                   title={logo.title}
-                  className="h-8"
+                  width={32}
+                  height={32}
                 />
               </a>
               <h2 className="text-xl font-semibold">{logo.title}</h2>

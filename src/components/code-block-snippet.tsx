@@ -92,7 +92,7 @@ export default function CodeBlockSnippet({
     <section className="container mx-auto px-4 py-8">
       <h2 className="text-4xl font-semibold tracking-tighter mb-3 text-center">
         Get Started with our{" "}
-        <span className="text-blue-500 dark:text-blue-400 italic">SDKs</span>
+        <span className="text-blue-500 italic">SDKs</span>
       </h2>
       <p className="text-center tracking-tighter text-gray-600 mb-8">
         We offer SDKs for popular programming languages to help you get started
@@ -103,7 +103,7 @@ export default function CodeBlockSnippet({
           {/* macOS window frame */}
           <div className="rounded-lg shadow-lg border bg-background overflow-hidden">
             {/* Window bar */}
-            <div className="flex items-center justify-between px-4 py-2 border-b bg-gray-100 dark:bg-zinc-800">
+            <div className="flex items-center justify-between px-4 py-2 border-b bg-gray-100">
               <div className="flex items-center gap-2">
                 {/* Traffic lights */}
                 <span className="size-3 rounded-full bg-red-500 inline-block" />
@@ -121,7 +121,7 @@ export default function CodeBlockSnippet({
                   <TabsTrigger
                     key={snip.title}
                     value={snip.title}
-                    className="rounded-md px-3 py-1.5 text-xs font-medium data-[state=active]:bg-white/80 dark:data-[state=active]:bg-zinc-700"
+                    className="rounded-md px-3 py-1.5 text-xs font-medium data-[state=active]:bg-white/80"
                   >
                     {snip.title}
                   </TabsTrigger>
@@ -142,7 +142,7 @@ export default function CodeBlockSnippet({
                     variant="outline"
                     size="icon"
                     onClick={() => handleCopy(snip.code, idx)}
-                    className="absolute right-2 top-2 h-7 w-7 bg-white dark:bg-zinc-800"
+                    className="absolute right-2 top-2 h-7 w-7 bg-white"
                   >
                     {copiedIndex === idx ? (
                       <Check className="h-3 w-3 text-green-500" />

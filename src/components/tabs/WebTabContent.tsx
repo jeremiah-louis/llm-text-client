@@ -94,9 +94,9 @@ export function WebTabContent({
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="mt-4 p-4 rounded-lg border border-red-200 bg-red-50 dark:bg-red-950/50 dark:border-red-800"
+                className="mt-4 p-4 rounded-lg border border-red-200 bg-red-50"
               >
-                <p className="text-sm text-red-600 dark:text-red-400">
+                <p className="text-sm text-red-600">
                   {error}
                 </p>
               </motion.div>
@@ -122,14 +122,14 @@ export function WebTabContent({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: 0.1 }}
-                  className="border-t border-zinc-200 dark:border-zinc-800 pt-8"
+                  className="border-t border-zinc-200 pt-8"
                 >
                   {isStructuredLoading ? (
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tighter text-center">
                         Extracting Data...
                       </h2>
-                      <div className="w-full p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
+                      <div className="w-full p-6 rounded-lg border border-zinc-200 bg-white/80 backdrop-blur-sm">
                         <div className="space-y-3">
                           <Skeleton className="h-4 w-3/4" />
                           <Skeleton className="h-4 w-full" />
@@ -174,9 +174,9 @@ export function WebTabContent({
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="mt-4 p-4 rounded-lg border border-red-200 bg-red-50 dark:bg-red-950/50 dark:border-red-800"
+                className="mt-4 p-4 rounded-lg border border-red-200 bg-red-50"
               >
-                <p className="text-sm text-red-600 dark:text-red-400">
+                <p className="text-sm text-red-600">
                   {error}
                 </p>
               </motion.div>
@@ -202,14 +202,14 @@ export function WebTabContent({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: 0.1 }}
-                  className="border-t border-zinc-200 dark:border-zinc-800 pt-8"
+                  className="border-t border-zinc-200 pt-8"
                 >
                   {isLoading ? (
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tighter text-center">
                         Generating Markdown...
                       </h2>
-                      <div className="w-full p-6 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm">
+                      <div className="w-full p-6 rounded-lg border border-zinc-200 bg-white/80 backdrop-blur-sm">
                         <div className="space-y-3">
                           <Skeleton className="h-4 w-3/4" />
                           <Skeleton className="h-4 w-full" />
