@@ -11,6 +11,7 @@ function Hero() {
   // List of content types that will be animated
   const titles = useMemo(
     () => [
+      "Shopify",
       "Website",
       "PDF",
       "Excel",

@@ -145,7 +145,7 @@ export function UrlToMarkdown() {
               `}
             >
               <span className="relative z-10">
-                {isLoading ? 'Generating...' : 'Generate 🫧'}
+                {isLoading ? 'Generating...' : 'Generate'}
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-blue-300 dark:from-blue-300 dark:to-blue-200 opacity-0 hover:opacity-20 transition-opacity duration-200" />
             </Button>
