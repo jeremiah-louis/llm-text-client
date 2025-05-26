@@ -50,7 +50,11 @@ export async function extractStructuredData(website: string, json_schema: string
     const { data } = await axios.post('/api/structured-output', {
       website,
       json_schema
-    });
+    },
+    {
+      timeout: 25000 // 25 seconds
+    }
+  );
 
     if (!data.data) {
       throw new Error('Invalid response from server');
