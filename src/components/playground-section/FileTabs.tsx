@@ -1,11 +1,8 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { WetroButton } from "./wetro-button";
-import { UrlToMarkdown } from "./url-to-markdown";
-import { FileUploader } from "./FileUploader";
+import { WebTabContent } from "../tabs/WebTabContent";
+import { triggerConfetti, validateUrl, handleGenerate as handleGenerateHelper } from "@/lib/webTabHelpers";
 
 // Simple Toggle Switch
 function Toggle({
@@ -42,11 +39,33 @@ function Toggle({
   );
 }
 
+/**
+ * FileTabs: Main tabbed interface for file, web, audio, and youtube content.
+ * Handles state and logic for the Web tab, delegates UI to WebTabContent.
+ */
 export function FileTabs() {
+  // State for structured output toggle and form fields
   const [structured, setStructured] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState("");
   const [structuredText, setStructuredText] = useState("");
+  const [markdown, setMarkdown] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  /**
+   * Handles the markdown generation process for the Web tab.
+   * Delegates to the shared helper.
+   */
+  const handleGenerate = (e: React.FormEvent) => {
+    handleGenerateHelper(
+      e,
+      url,
+      setError,
+      setIsLoading,
+      setMarkdown,
+      triggerConfetti
+    );
+  };
 
   return (
     <Tabs defaultValue="web" className="w-full max-w-2xl mx-auto mt-8">
@@ -59,38 +78,19 @@ export function FileTabs() {
       <TabsContent value="files">
         <div className="text-center text-gray-400 py-12 text-lg font-medium">Files & Images tab coming soon...</div>
       </TabsContent>
-
       <TabsContent value="web">
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between">
-            <Toggle
-              checked={structured}
-              onChange={setStructured}
-              label="Structured Output"
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium">URL</label>
-            <Input
-              className="h-11"
-              placeholder="https://wetrocloud.com"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-          </div>
-          {structured && (
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Schema</label>
-              <Input
-                className="h-11"
-                placeholder="Enter structured output details..."
-                value={structuredText}
-                onChange={(e) => setStructuredText(e.target.value)}
-              />
-            </div>
-          )}
-          <WetroButton />
-        </div>
+        <WebTabContent
+          structured={structured}
+          setStructured={setStructured}
+          url={url}
+          setUrl={setUrl}
+          structuredText={structuredText}
+          setStructuredText={setStructuredText}
+          isLoading={isLoading}
+          error={error}
+          markdown={markdown}
+          handleGenerate={handleGenerate}
+        />
       </TabsContent>
       <TabsContent value="audio">
         <div className="text-center">Audio tab coming soon...</div>

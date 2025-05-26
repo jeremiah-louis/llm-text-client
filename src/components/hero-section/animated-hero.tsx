@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
-import { Button } from "@/components/ui/animated-hero-button";
+import { Button } from "@/components/hero-section/animated-hero-button";
 
 function Hero() {
   // State management for animated text

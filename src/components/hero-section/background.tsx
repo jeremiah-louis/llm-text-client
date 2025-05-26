@@ -1,4 +1,4 @@
-import { Tiles } from "./ui/tiles";
+import { Tiles } from "../ui/tiles";
 
 export default function Background() {
   return (

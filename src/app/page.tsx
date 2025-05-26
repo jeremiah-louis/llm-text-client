@@ -1,12 +1,12 @@
 import { UrlToMarkdown } from "@/components/url-to-markdown"
 import Image from "next/image"
 import Link from "next/link"
-import { Hero } from "@/components/ui/animated-hero"
-import Background from "@/components/background"
+import { Hero } from "@/components/hero-section/animated-hero"
+import Background from "@/components/hero-section/background"
 import Header from "@/components/header"
 import CodeBlockSnippet from "@/components/code-block-snippet"
 import { Footer } from "@/components/footer"
-import { FileTabs } from "@/components/FileTabs"
+import { FileTabs } from "@/components/playground-section/FileTabs"
 
 export default function Home() {
   return (

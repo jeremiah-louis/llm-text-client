@@ -1,5 +1,5 @@
-import { Button } from "./ui/button";
-import { ButtonProps } from "./ui/animated-hero-button";
+import { Button } from "./button";
+import { ButtonProps } from "../hero-section/animated-hero-button";
 
 interface WetroButtonProps extends ButtonProps {
   children?: React.ReactNode;
