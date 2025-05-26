@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { MoveRight, PhoneCall } from "lucide-react";
 import { Button } from "@/components/hero-section/animated-hero-button";
+import Background from "./background";
 
 function Hero() {
   // State management for animated text
@@ -41,6 +42,7 @@ function Hero() {
   return (
     // Main hero container
     <div className="w-full">
+      <Background />
       <div className="container mx-auto">
         {/* Hero content wrapper with padding and flex layout */}
         <div className="flex gap-8 py-10 items-center justify-center flex-col">
@@ -78,7 +80,7 @@ function Hero() {
                   <motion.span
                     key={index}
                     className="absolute font-semibold text-blue-500"
-                    initial={{ opacity: 0, y: "-100", scale: 0.8 }}
+                    initial={{ opacity: 0, y: -100, scale: 0.8 }}
                     transition={{ 
                       type: "spring", 
                       stiffness: 45, 

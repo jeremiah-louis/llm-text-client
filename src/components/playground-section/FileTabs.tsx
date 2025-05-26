@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { WebTabContent } from "../tabs/WebTabContent";
-import { triggerConfetti, validateUrl, handleGenerate as handleGenerateHelper } from "@/lib/webTabHelpers";
+import { triggerConfetti, handleGenerate as handleGenerateHelper, handleStructuredGenerate } from "@/lib/webTabHelpers";
 
 // Simple Toggle Switch
 function Toggle({
@@ -44,13 +44,18 @@ function Toggle({
  * Handles state and logic for the Web tab, delegates UI to WebTabContent.
  */
 export function FileTabs() {
-  // State for structured output toggle and form fields
+  // State for active tab and structured output toggle
+  const [activeTab, setActiveTab] = useState("web");
   const [structured, setStructured] = useState(false);
   const [url, setUrl] = useState("");
   const [structuredText, setStructuredText] = useState("");
   const [markdown, setMarkdown] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // structured output results
+  const [structuredData, setStructuredData] = useState("");
+  const [isStructuredLoading, setIsStructuredLoading] = useState(false);
 
   /**
    * Handles the markdown generation process for the Web tab.
@@ -67,9 +72,35 @@ export function FileTabs() {
     );
   };
 
+  const handleStructured = (e: React.FormEvent) => {
+    handleStructuredGenerate(
+      e,
+      url,
+      structuredText,
+      setError,
+      setIsStructuredLoading,
+      setStructuredData,
+      triggerConfetti,
+    );
+  };
+
   return (
-    <Tabs defaultValue="web" className="w-full max-w-2xl mx-auto mt-8">
-      <TabsList className="mb-4 py-7">
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full max-w-2xl mx-auto mt-8">
+      {/* Mobile dropdown */}
+      <div className="mb-4 md:hidden">
+        <select
+          value={activeTab}
+          onChange={(e)=>setActiveTab(e.target.value)}
+          className="w-full rounded-md border bg-background py-2 px-3 text-sm"
+        >
+          <option value="web">Web</option>
+          <option value="files">Files & Images</option>
+          <option value="audio">Audio</option>
+          <option value="youtube">Youtube</option>
+        </select>
+      </div>
+      {/* Desktop tab list */}
+      <TabsList className="hidden md:flex mb-4 py-7 gap-2">
         <TabsTrigger value="web">Web</TabsTrigger>
         <TabsTrigger value="files">Files & Images</TabsTrigger>
         <TabsTrigger value="audio">Audio</TabsTrigger>
@@ -89,7 +120,10 @@ export function FileTabs() {
           isLoading={isLoading}
           error={error}
           markdown={markdown}
+          structuredData={structuredData}
+          isStructuredLoading={isStructuredLoading}
           handleGenerate={handleGenerate}
+          handleStructuredGenerate={handleStructured}
         />
       </TabsContent>
       <TabsContent value="audio">

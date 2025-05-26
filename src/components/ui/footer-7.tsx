@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaTwitter, FaEnvelope, FaYoutube, FaDiscord } from "react-icons/fa";
 
 interface Footer7Props {
   logo?: {
@@ -56,10 +56,11 @@ const defaultSections = [
 ];
 
 const defaultSocialLinks = [
-  { icon: <FaInstagram className="size-5" />, href: "#", label: "Instagram" },
-  { icon: <FaFacebook className="size-5" />, href: "#", label: "Facebook" },
-  { icon: <FaTwitter className="size-5" />, href: "#", label: "Twitter" },
-  { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
+  { icon: <FaEnvelope className="size-5" />, href: "mailto:hello@wetrocloud.com", label: "Email" },
+  { icon: <FaYoutube className="size-5" />, href: "https://www.youtube.com/@wetrocloud", label: "Youtube" },
+  { icon: <FaTwitter className="size-5" />, href: "https://twitter.com/wetrocloud", label: "Twitter" },
+  { icon: <FaLinkedin className="size-5" />, href: "https://www.linkedin.com/company/wetrocloud", label: "LinkedIn" },
+  { icon: <FaDiscord className="size-5" />, href: "https://discord.gg/3XqN6zWM5f", label: "Discord" },
 ];
 
 const defaultLegalLinks = [
@@ -82,7 +83,7 @@ export const Footer7 = ({
 }: Footer7Props) => {
   return (
     <section>
-      <div className="container  mx-16">
+      <div className="container p-8 sm:p-16">
         <div className="flex w-full flex-col justify-between gap-10 lg:flex-row lg:items-start lg:text-left">
           <div className="flex w-full flex-col justify-between gap-6 lg:items-start">
             {/* Logo */}

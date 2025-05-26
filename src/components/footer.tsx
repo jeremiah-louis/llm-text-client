@@ -14,40 +14,32 @@ export const Footer = () => {
         {
           title: "Product",
           links: [
-            // TODO: Update footer links to match actual routes and pages
-            // - URL to Markdown: Update href when landing page is ready
-            // - Pricing: Update href when pricing page is implemented
-            // - Documentation: Update href when docs are migrated
-            // - API Reference: Update href when API docs are ready
-            { name: "URL to Markdown", href: "/" },
-            { name: "Pricing", href: "/pricing" },
-            { name: "Documentation", href: "/docs" },
-            { name: "API Reference", href: "/api" },
+            { name: "Documentation", href: "https://docs.wetrocloud.com" },
+            { name: "Playground", href: "https://docs.wetrocloud.com" },
           ],
         },
         {
           title: "Company",
           links: [
-            { name: "About", href: "https://wetrocloud.com/about" },
-            { name: "Blog", href: "https://wetrocloud.com/blog" },
-            { name: "Careers", href: "https://wetrocloud.com/careers" },
-            { name: "Contact", href: "https://wetrocloud.com/contact" },
+            // { name: "About", href: "https://wetrocloud.com/about" },
+            { name: "Blog", href: "https://medium.com/@wetrocloud" },
+            { name: "Pricing", href: "https://wetrocloud.com/pricing" },
+            { name: "Book a Demo", href: "https://cal.com/divinejoshua/wetrocloud-demo" },
           ],
         },
         {
           title: "Resources",
           links: [
-            { name: "Help Center", href: "/help" },
-            { name: "Support", href: "/support" },
-            { name: "Status", href: "/status" },
-            { name: "Privacy", href: "/privacy" },
+            { name: "Help Center", href: "https://discord.gg/3XqN6zWM5f" },
+            { name: "Support", href: "https://discord.gg/3XqN6zWM5f" },
+            { name: "Privacy", href: "https://wetrocloud.com/legal/privacy-policy" },
           ],
         },
       ]}
       copyright={`© ${new Date().getFullYear()} Wetrocloud. All rights reserved.`}
       legalLinks={[
-        { name: "Terms of Service", href: "/terms" },
-        { name: "Privacy Policy", href: "/privacy" },
+        { name: "Terms of Service", href: "https://wetrocloud.com/legal/terms-of-service" },
+        { name: "Privacy Policy", href: "https://wetrocloud.com/legal/privacy-policy" },
       ]}
     />
   );

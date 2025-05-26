@@ -1,5 +1,5 @@
 import confetti from "canvas-confetti";
-import { generateMarkdown } from "@/lib/api";
+import { generateMarkdown, extractStructuredData } from "@/lib/api";
 
 /**
  * Triggers confetti animation on successful markdown generation.
@@ -85,6 +85,60 @@ export async function handleGenerate(
     console.error("Error:", err);
     setError(err instanceof Error ? err.message : "Failed to generate markdown. Please try again.");
     setMarkdown("");
+  } finally {
+    setIsLoading(false);
+  }
+}
+
+/**
+ * Handles structured data extraction when structured output is enabled.
+ * Updates state via provided setters.
+ */
+export async function handleStructuredGenerate(
+  e: React.FormEvent,
+  url: string,
+  schema: string,
+  setError: (msg: string | null) => void,
+  setIsLoading: (v: boolean) => void,
+  setStructuredData: (v: string) => void,
+  triggerConfetti: () => void
+) {
+  e.preventDefault();
+  const validation = validateUrl(url);
+  if (typeof validation === "string") {
+    setError(validation);
+    return;
+  }
+  if (!schema.trim()) {
+    setError("Please provide a JSON schema");
+    return;
+  }
+  // Validate JSON schema
+  setIsLoading(true);
+  setError(null);
+  setStructuredData("");
+  try {
+    // Validate JSON schema before making the API call
+    let parsedSchema;
+    try {
+      parsedSchema = JSON.parse(schema);
+    } catch (parseError) {
+      setError("Invalid JSON schema format. Please check your schema syntax.");
+      setIsLoading(false);
+      return;
+    }
+
+    const data = await extractStructuredData(url, JSON.stringify(parsedSchema));
+    if (data) {
+      setStructuredData(JSON.stringify(data, null, 2));
+      triggerConfetti();
+    } else {
+      throw new Error("Failed to extract structured data");
+    }
+  } catch (err: any) {
+    console.error("Error:", err);
+    setError(err instanceof Error ? err.message : "Failed to extract structured data. Please try again.");
+    setStructuredData("");
   } finally {
     setIsLoading(false);
   }
