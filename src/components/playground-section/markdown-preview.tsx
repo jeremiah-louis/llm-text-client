@@ -28,13 +28,13 @@ export function MarkdownPreview({ markdown }: MarkdownPreviewProps) {
 
   return (
     <div className="w-full max-w-6xl mx-auto px-4 sm:px-6">
-      <div className="relative w-full overflow-hidden bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="relative w-full overflow-hidden bg-zinc-50 rounded-lg border border-zinc-200">
         <div className="absolute right-2 sm:right-4 top-2 sm:top-4 flex gap-2">
           <Button
             variant="outline"
             size="icon"
             onClick={copyToClipboard}
-            className="h-7 w-7 sm:h-8 sm:w-8 bg-white dark:bg-zinc-800"
+            className="h-7 w-7 sm:h-8 sm:w-8 bg-white"
           >
             {copied ? (
               <Check className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" />
@@ -47,7 +47,7 @@ export function MarkdownPreview({ markdown }: MarkdownPreviewProps) {
               variant="outline"
               size="icon"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="h-7 w-7 sm:h-8 sm:w-8 bg-white dark:bg-zinc-800"
+              className="h-7 w-7 sm:h-8 sm:w-8 bg-white"
             >
               {isExpanded ? (
                 <ChevronUp className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -58,10 +58,10 @@ export function MarkdownPreview({ markdown }: MarkdownPreviewProps) {
           )}
         </div>
         <div className="w-full overflow-auto p-4 sm:p-8 font-mono text-xs sm:text-sm">
-          <pre className="whitespace-pre-wrap break-words text-left text-slate-800 dark:text-slate-200">
+          <pre className="whitespace-pre-wrap break-words text-left text-slate-800">
             {isExpanded ? markdown : previewLines}
             {!isExpanded && hasMoreContent && (
-              <div className="mt-2 text-zinc-500 dark:text-zinc-400">
+              <div className="mt-2 text-zinc-500">
                 ... {markdown.split('\n').length - 5} more lines
               </div>
             )}
