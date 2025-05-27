@@ -109,7 +109,7 @@ function Hero() {
             </h1>
 
             {/* Hero Description Text */}
-            <p className="text-lg md:text-xl leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
+            <p className="text-lg md:text-xl px-6 leading-relaxed tracking-tight text-muted-foreground max-w-2xl text-center">
               Power your AI applications with clean structured data from all types of resources. Web, File, Image, Audio, Video & Youtube.
             </p>
           </div>
