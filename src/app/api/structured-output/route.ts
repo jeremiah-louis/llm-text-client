@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import Wetrocloud from "wetro-sdk";
 
 const wetrocloud = new Wetrocloud({ apiKey: process.env.WETRO_API_KEY || "" });
-
+export const maxDuration = 30;
 export async function POST(request: Request) {
   try {
     const { website, json_schema } = await request.json();
