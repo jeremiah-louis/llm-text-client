@@ -51,9 +51,6 @@ export async function extractStructuredData(website: string, json_schema: string
       website,
       json_schema
     },
-    {
-      timeout: 25000 // 25 seconds
-    }
   );
 
     if (!data.data) {
@@ -78,3 +75,4 @@ export async function extractStructuredData(website: string, json_schema: string
     throw new Error('Failed to extract structured data. Please try again.');
   }
 }
+export const runtime = 'edge';
