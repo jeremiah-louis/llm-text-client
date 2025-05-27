@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://wetrocloud.com'),
   title: {
-    default: "URL to Markdown | Wetrocloud",
+    default: "URL to Markdown | Wetrocloud Playground",
     template: "%s | Wetrocloud"
   },
   description: "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://wetrocloud.com",
-    title: "URL to Markdown | Wetrocloud",
+    title: "URL to Markdown | Wetrocloud Playground",
     description: "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
     siteName: "Wetrocloud",
     images: [{
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "URL to Markdown | Wetrocloud",
+    title: "URL to Markdown | Wetrocloud Playground",
     description: "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
     images: ["/og-image.png"],
     creator: "@wetrocloud",
