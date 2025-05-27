@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     description: "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
     siteName: "Wetrocloud",
     images: [{
-      url: "https://wetrocloud.com/meta-banner.jpg",
+      url: "https://playground.wetrocloud.com/og-image.png",
       width: 1200,
       height: 630,
       alt: "Wetrocloud URL to Markdown Converter",
@@ -107,10 +107,10 @@ export default function RootLayout({
         {/* Twitter OG metadata */}
         <meta property="twitter:title" content="URL to Markdown | Wetrocloud" />
         <meta property="twitter:description" content="Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing." />
-        <meta property="twitter:image" content="https://wetrocloud.com/meta-banner.jpg" />
-        <meta name="twitter:image:summary_photo_image:src" content="https://wetrocloud.com/meta-banner.jpg"/>
-        <meta name="twitter:image:photo_image_full_size:src" content="https://wetrocloud.com/meta-banner.jpg"/>
-        <meta name="twitter:image:thumbnail_image:src" content="https://wetrocloud.com/meta-banner.jpg"/>
+        <meta property="twitter:image" content="https://playground.wetrocloud.com/og-image.png" />
+        <meta name="twitter:image:summary_photo_image:src" content="https://playground.wetrocloud.com/og-image.png"/>
+        <meta name="twitter:image:photo_image_full_size:src" content="https://playground.wetrocloud.com/og-image.png"/>
+        <meta name="twitter:image:thumbnail_image:src" content="https://playground.wetrocloud.com/og-image.png"/>
         <meta name="twitter:card" content="summary_large_image"/>
         <meta name="twitter:site" content="https://wetrocloud.com"/>
         <script
