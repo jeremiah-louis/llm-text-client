@@ -5,6 +5,8 @@ import { MarkdownPreview } from "@/components/playground-section/markdown-previe
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { Toggle } from "./Toggle";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
 
 /**
  * Props for the WebTabContent component.
@@ -59,7 +61,19 @@ export function WebTabContent({
             className="flex flex-col gap-3"
           >
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Website URL</label>
+              <label className="text-sm font-medium flex items-center gap-1">
+                Website URL
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span tabIndex={0} className="outline-none">
+                      <InfoCircledIcon className="w-4 h-4 text-zinc-400 cursor-pointer" />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Enter the full URL of the website you want to extract data from.
+                  </TooltipContent>
+                </Tooltip>
+              </label>
               <Input
                 className="h-11"
                 placeholder="https://wetrocloud.com"
@@ -68,7 +82,19 @@ export function WebTabContent({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">JSON Schema</label>
+              <label className="text-sm font-medium flex items-center gap-1">
+                JSON Schema
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span tabIndex={0} className="outline-none">
+                      <InfoCircledIcon className="w-4 h-4 text-zinc-400 cursor-pointer" />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Provide a valid JSON schema describing the structure of the data you want to extract.
+                  </TooltipContent>
+                </Tooltip>
+              </label>
               <textarea
                 style={{ resize: "vertical" }}
                 className="h-40 font-mono text-sm w-full rounded-md border border-input bg-background px-3 py-2"
@@ -156,7 +182,19 @@ export function WebTabContent({
         <>
           <form onSubmit={handleGenerate} className="flex flex-col gap-3">
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Website URL</label>
+              <label className="text-sm font-medium flex items-center gap-1">
+                Website URL
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span tabIndex={0} className="outline-none">
+                      <InfoCircledIcon className="w-4 h-4 text-zinc-400 cursor-pointer" />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Enter the full URL of the website you want to extract markdown from.
+                  </TooltipContent>
+                </Tooltip>
+              </label>
               <Input
                 className="h-11"
                 placeholder="https://example.com"
