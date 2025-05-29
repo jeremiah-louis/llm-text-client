@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Toggle } from "./Toggle";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { useCyclingMessage } from "../../hooks/useCyclingMessage";
 
 /**
  * Props for the WebTabContent component.
@@ -153,7 +154,13 @@ export function WebTabContent({
                   {isStructuredLoading ? (
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tighter text-center">
-                        Extracting Data...
+                        {useCyclingMessage([
+                          "🧠 Downloading braincells...",
+                          "💅 Formatting that info real cute...",
+                          "🛠️ Hacking into the matrix (legally)...",
+                          "👾 Extracting stats like it's a speedrun...",
+                          "👨‍🍳 Cooking up results...",
+                        ])}
                       </h2>
                       <div className="w-full p-6 rounded-lg border border-zinc-200 bg-white/80 backdrop-blur-sm">
                         <div className="space-y-3">
@@ -245,7 +252,13 @@ export function WebTabContent({
                   {isLoading ? (
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tighter text-center">
-                        Generating Markdown...
+                        {useCyclingMessage([
+                          "🧠 Downloading braincells...",
+                          "💅 Formatting that info real cute...",
+                          "🛠️ Hacking into the matrix (legally)...",
+                          "👾 Extracting stats like it's a speedrun...",
+                          "👨‍🍳 Cooking up results...",
+                        ])}
                       </h2>
                       <div className="w-full p-6 rounded-lg border border-zinc-200 bg-white/80 backdrop-blur-sm">
                         <div className="space-y-3">
