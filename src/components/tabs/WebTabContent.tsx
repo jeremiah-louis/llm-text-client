@@ -5,7 +5,11 @@ import { MarkdownPreview } from "@/components/playground-section/markdown-previe
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { Toggle } from "./Toggle";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useCyclingMessage } from "../../hooks/useCyclingMessage";
 
@@ -24,8 +28,6 @@ const unstructuredMessages = [
   "👨‍🍳 Cooking up results...",
 ];
 
-const cyclingStructuredMessage = useCyclingMessage(structuredMessages);
-const cyclingUnstructuredMessage = useCyclingMessage(unstructuredMessages);
 /**
  * Props for the WebTabContent component.
  */
@@ -63,6 +65,8 @@ export function WebTabContent({
   handleGenerate,
   handleStructuredGenerate,
 }: WebTabContentProps) {
+  const cyclingStructuredMessage = useCyclingMessage(structuredMessages);
+  const cyclingUnstructuredMessage = useCyclingMessage(unstructuredMessages);
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -88,7 +92,8 @@ export function WebTabContent({
                     </span>
                   </TooltipTrigger>
                   <TooltipContent>
-                    Enter the full URL of the website you want to extract data from.
+                    Enter the full URL of the website you want to extract data
+                    from.
                   </TooltipContent>
                 </Tooltip>
               </label>
@@ -109,7 +114,8 @@ export function WebTabContent({
                     </span>
                   </TooltipTrigger>
                   <TooltipContent>
-                    Provide a valid JSON schema describing the structure of the data you want to extract.
+                    Provide a valid JSON schema describing the structure of the
+                    data you want to extract.
                   </TooltipContent>
                 </Tooltip>
               </label>
@@ -140,9 +146,7 @@ export function WebTabContent({
                 exit={{ opacity: 0, y: -10 }}
                 className="mt-4 p-4 rounded-lg border border-red-200 bg-red-50"
               >
-                <p className="text-sm text-red-600">
-                  {error}
-                </p>
+                <p className="text-sm text-red-600">{error}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -209,7 +213,8 @@ export function WebTabContent({
                     </span>
                   </TooltipTrigger>
                   <TooltipContent>
-                    Enter the full URL of the website you want to extract markdown from.
+                    Enter the full URL of the website you want to extract
+                    markdown from.
                   </TooltipContent>
                 </Tooltip>
               </label>
@@ -232,9 +237,7 @@ export function WebTabContent({
                 exit={{ opacity: 0, y: -10 }}
                 className="mt-4 p-4 rounded-lg border border-red-200 bg-red-50"
               >
-                <p className="text-sm text-red-600">
-                  {error}
-                </p>
+                <p className="text-sm text-red-600">{error}</p>
               </motion.div>
             )}
           </AnimatePresence>
