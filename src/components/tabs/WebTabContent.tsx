@@ -9,6 +9,23 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useCyclingMessage } from "../../hooks/useCyclingMessage";
 
+const structuredMessages = [
+  "🧠 Downloading braincells...",
+  "💅 Formatting that info real cute...",
+  "🛠️ Hacking into the matrix (legally)...",
+  "👾 Extracting stats like it's a speedrun...",
+  "👨‍🍳 Cooking up results...",
+];
+const unstructuredMessages = [
+  "🧠 Downloading braincells...",
+  "💅 Formatting that info real cute...",
+  "🛠️ Hacking into the matrix (legally)...",
+  "👾 Extracting stats like it's a speedrun...",
+  "👨‍🍳 Cooking up results...",
+];
+
+const cyclingStructuredMessage = useCyclingMessage(structuredMessages);
+const cyclingUnstructuredMessage = useCyclingMessage(unstructuredMessages);
 /**
  * Props for the WebTabContent component.
  */
@@ -154,13 +171,7 @@ export function WebTabContent({
                   {isStructuredLoading ? (
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tighter text-center">
-                        {useCyclingMessage([
-                          "🧠 Downloading braincells...",
-                          "💅 Formatting that info real cute...",
-                          "🛠️ Hacking into the matrix (legally)...",
-                          "👾 Extracting stats like it's a speedrun...",
-                          "👨‍🍳 Cooking up results...",
-                        ])}
+                        {cyclingStructuredMessage}
                       </h2>
                       <div className="w-full p-6 rounded-lg border border-zinc-200 bg-white/80 backdrop-blur-sm">
                         <div className="space-y-3">
@@ -252,13 +263,7 @@ export function WebTabContent({
                   {isLoading ? (
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tighter text-center">
-                        {useCyclingMessage([
-                          "🧠 Downloading braincells...",
-                          "💅 Formatting that info real cute...",
-                          "🛠️ Hacking into the matrix (legally)...",
-                          "👾 Extracting stats like it's a speedrun...",
-                          "👨‍🍳 Cooking up results...",
-                        ])}
+                        {cyclingUnstructuredMessage}
                       </h2>
                       <div className="w-full p-6 rounded-lg border border-zinc-200 bg-white/80 backdrop-blur-sm">
                         <div className="space-y-3">
