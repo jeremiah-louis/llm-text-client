@@ -5,6 +5,28 @@ import { MarkdownPreview } from "@/components/playground-section/markdown-previe
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import { Toggle } from "./Toggle";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
+import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { useCyclingMessage } from "../../hooks/useCyclingMessage";
+
+const structuredMessages = [
+  "🧠 Downloading braincells...",
+  "💅 Formatting that info real cute...",
+  "🛠️ Hacking into the matrix (legally)...",
+  "👾 Extracting stats like it's a speedrun...",
+  "👨‍🍳 Cooking up results...",
+];
+const unstructuredMessages = [
+  "🧠 Downloading braincells...",
+  "💅 Formatting that info real cute...",
+  "🛠️ Hacking into the matrix (legally)...",
+  "👾 Extracting stats like it's a speedrun...",
+  "👨‍🍳 Cooking up results...",
+];
 
 /**
  * Props for the WebTabContent component.
@@ -43,6 +65,8 @@ export function WebTabContent({
   handleGenerate,
   handleStructuredGenerate,
 }: WebTabContentProps) {
+  const cyclingStructuredMessage = useCyclingMessage(structuredMessages);
+  const cyclingUnstructuredMessage = useCyclingMessage(unstructuredMessages);
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -59,7 +83,20 @@ export function WebTabContent({
             className="flex flex-col gap-3"
           >
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Website URL</label>
+              <label className="text-sm font-medium flex items-center gap-1">
+                Website URL
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span tabIndex={0} className="outline-none">
+                      <InfoCircledIcon className="w-4 h-4 text-zinc-400 cursor-pointer" />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Enter the full URL of the website you want to extract data
+                    from.
+                  </TooltipContent>
+                </Tooltip>
+              </label>
               <Input
                 className="h-11"
                 placeholder="https://wetrocloud.com"
@@ -68,7 +105,20 @@ export function WebTabContent({
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">JSON Schema</label>
+              <label className="text-sm font-medium flex items-center gap-1">
+                JSON Schema
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span tabIndex={0} className="outline-none">
+                      <InfoCircledIcon className="w-4 h-4 text-zinc-400 cursor-pointer" />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Provide a valid JSON schema describing the structure of the
+                    data you want to extract.
+                  </TooltipContent>
+                </Tooltip>
+              </label>
               <textarea
                 style={{ resize: "vertical" }}
                 className="h-40 font-mono text-sm w-full rounded-md border border-input bg-background px-3 py-2"
@@ -96,9 +146,7 @@ export function WebTabContent({
                 exit={{ opacity: 0, y: -10 }}
                 className="mt-4 p-4 rounded-lg border border-red-200 bg-red-50"
               >
-                <p className="text-sm text-red-600">
-                  {error}
-                </p>
+                <p className="text-sm text-red-600">{error}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -127,7 +175,7 @@ export function WebTabContent({
                   {isStructuredLoading ? (
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tighter text-center">
-                        Extracting Data...
+                        {cyclingStructuredMessage}
                       </h2>
                       <div className="w-full p-6 rounded-lg border border-zinc-200 bg-white/80 backdrop-blur-sm">
                         <div className="space-y-3">
@@ -156,7 +204,20 @@ export function WebTabContent({
         <>
           <form onSubmit={handleGenerate} className="flex flex-col gap-3">
             <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium">Website URL</label>
+              <label className="text-sm font-medium flex items-center gap-1">
+                Website URL
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span tabIndex={0} className="outline-none">
+                      <InfoCircledIcon className="w-4 h-4 text-zinc-400 cursor-pointer" />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    Enter the full URL of the website you want to extract
+                    markdown from.
+                  </TooltipContent>
+                </Tooltip>
+              </label>
               <Input
                 className="h-11"
                 placeholder="https://example.com"
@@ -176,9 +237,7 @@ export function WebTabContent({
                 exit={{ opacity: 0, y: -10 }}
                 className="mt-4 p-4 rounded-lg border border-red-200 bg-red-50"
               >
-                <p className="text-sm text-red-600">
-                  {error}
-                </p>
+                <p className="text-sm text-red-600">{error}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -207,7 +266,7 @@ export function WebTabContent({
                   {isLoading ? (
                     <div className="space-y-4">
                       <h2 className="text-2xl font-semibold tracking-tighter text-center">
-                        Generating Markdown...
+                        {cyclingUnstructuredMessage}
                       </h2>
                       <div className="w-full p-6 rounded-lg border border-zinc-200 bg-white/80 backdrop-blur-sm">
                         <div className="space-y-3">
