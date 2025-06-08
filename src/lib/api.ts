@@ -9,7 +9,7 @@ export async function generateMarkdown(link: string): Promise<string> {
     const { data } = await axios.post('/api/generate-md', { link });
 
     if (!data.markdown) {
-      throw new Error('Invalid response from server');
+      throw new Error('An error occurred. Please try again. If the problem persists, reach out to hello@wetrocloud.com for help');
     }
     
     return data.markdown;
@@ -21,18 +21,18 @@ export async function generateMarkdown(link: string): Promise<string> {
       if (error.response) {
         // The server responded with a status code outside of 2xx
         const message = error.response.data?.error || error.message;
-        throw new Error(message);
+        throw new Error('An error occurred. Please try again. If the problem persists, reach out to hello@wetrocloud.com for help');
       } else if (error.request) {
         // The request was made but no response was received
-        throw new Error('No response from server. Please check your internet connection.');
+        throw new Error('Please check your internet connection and try again. If the problem persists, reach out to hello@wetrocloud.com for help');
       } else {
         // Something happened in setting up the request
-        throw new Error(`Request failed: ${error.message}`);
+        throw new Error('An error occurred. Please try again. If the problem persists, reach out to hello@wetrocloud.com for help');
       }
     }
 
     // Handle non-Axios errors
-    throw new Error('Failed to generate markdown. Please try again.');
+    throw new Error('Failed to generate markdown, Please try again. If the problem persists, reach out to hello@wetrocloud.com for help');
   }
 }
 
@@ -54,7 +54,7 @@ export async function extractStructuredData(website: string, json_schema: string
   );
 
     if (!data.data) {
-      throw new Error('Invalid response from server');
+      throw new Error('An error occurred. Please try again. If the problem persists, reach out to hello@wetrocloud.com for help');
     }
 
     return data.data;
@@ -66,12 +66,12 @@ export async function extractStructuredData(website: string, json_schema: string
         const message = error.response.data?.error || error.message;
         throw new Error(message);
       } else if (error.request) {
-        throw new Error('No response from server. Please check your internet connection.');
+        throw new Error('Please check your internet connection and try again');
       } else {
-        throw new Error(`Request failed: ${error.message}`);
+        throw new Error('An error occurred. Please try again. If the problem persists, reach out to hello@wetrocloud.com for help');
       }
     }
 
-    throw new Error('Failed to extract structured data. Please try again.');
+    throw new Error('Failed to extract structured data. Please try again. If the problem persists, reach out to hello@wetrocloud.com for help');
   }
 }

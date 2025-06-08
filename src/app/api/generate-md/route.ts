@@ -1,13 +1,7 @@
 import { NextResponse } from 'next/server';
-import axios from 'axios';
+import Wetrocloud from 'wetro-sdk';
 
-const api = axios.create({
-  baseURL: process.env.API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Token ${process.env.WETRO_API_KEY}`,
-  },
-});
+const client = new Wetrocloud({ apiKey: process.env.WETRO_API_KEY || "" });
 
 export async function POST(request: Request) {
   try {
@@ -20,29 +14,27 @@ export async function POST(request: Request) {
       );
     }
 
-    const { data } = await api.post('/markdown-converter/', { 
-      link, 
-      resource_type: 'web' 
+    const response = await client.markDownConverter({
+      resource: link,
+      resource_type: 'web'
     });
 
-    if (!data?.response) {
+    if (!response || !response.success) {
       return NextResponse.json(
-        { error: 'No content received from server' },
+        { error: 'Failed to generate markdown' },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ markdown: data.response });
+    return NextResponse.json({
+      success: response.success,
+      tokens: response.tokens,
+      markdown: response.response
+    });
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const status = error.response?.status || 500;
-      const message = error.response?.data?.message || error.message;
-      return NextResponse.json({ error: message }, { status });
-    }
-
     return NextResponse.json(
-      { error: 'Failed to generate markdown' },
+      { error: error instanceof Error ? error.message : 'Failed to generate markdown' },
       { status: 500 }
     );
   }
-} 
+}
