@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       secure: true,       // Only sent over HTTPS
       sameSite: 'strict', // Prevents CSRF attacks
       path: '/',          // Cookie available across all paths
-      // Optionally set maxAge for session duration, e.g., 1 day:
+      // TODO: Dont forget to set maxAge for session duration, e.g., 1 day:
       // maxAge: 60 * 60 * 24,
     });
 
