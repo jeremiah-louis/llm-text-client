@@ -1,12 +1,10 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
+import Wetrocloud from "wetro-sdk";
 
-const api = axios.create({
-  baseURL: process.env.API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Token ${process.env.WETRO_API_KEY}`,
-  },
+// Initialize the Wetrocloud client
+const client = new Wetrocloud({
+  apiKey: process.env.WETRO_API_KEY || ""
 });
 
 export async function POST(request: Request) {
@@ -20,19 +18,19 @@ export async function POST(request: Request) {
       );
     }
 
-    const { data } = await api.post('/markdown-converter/', { 
-      link, 
-      resource_type: 'web' 
+    const { response } = await client.markDownConverter({
+      resource: link,
+      resource_type: 'web'
     });
 
-    if (!data?.response) {
+    if (!response) {
       return NextResponse.json(
         { error: 'No content received from server' },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ markdown: data.response });
+    return NextResponse.json({ markdown: response });
   } catch (error) {
     if (axios.isAxiosError(error)) {
       const status = error.response?.status || 500;

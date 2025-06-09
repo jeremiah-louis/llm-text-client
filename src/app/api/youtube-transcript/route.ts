@@ -20,23 +20,13 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
+
     const response = await wetrocloud.transcript({
       resource: url,
       resource_type: "youtube"
     });
 
-    // Attempt to locate the `json` key in different possible nesting levels.
-    const jsonPayload =
-      (response as any)?.json || (response as any)?.data?.json || (response as any)?.response?.data?.json;
-
-    if (!jsonPayload) {
-      return NextResponse.json(
-        { error: 'No "json" field found in extraction response' },
-        { status: 500 },
-      );
-    }
-
-    return NextResponse.json({ data: jsonPayload });
+    return NextResponse.json({ data: response });
 
   } catch (error) {
     console.error('Extraction error:', error);

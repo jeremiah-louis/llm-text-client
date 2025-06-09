@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { WebTabContent } from "../tabs/WebTabContent";
+import { YoutubeTabContent } from "../tabs/YoutubeTabContent";
 import { triggerConfetti, handleGenerate as handleGenerateHelper, handleStructuredGenerate } from "@/lib/webTabHelpers";
+import { fetchYoutubeTranscript } from "@/lib/youtubeTabHelpers";
 
 // Simple Toggle Switch
 function Toggle({
@@ -56,6 +58,20 @@ export function FileTabs() {
   // structured output results
   const [structuredData, setStructuredData] = useState("");
   const [isStructuredLoading, setIsStructuredLoading] = useState(false);
+  const [youtubeTranscript, setYoutubeTranscript] = useState("");
+
+  /**
+   * Handles the YouTube transcript generation
+   */
+  const handleYoutubeGenerate = async (e: FormEvent) => {
+    e.preventDefault();
+    await fetchYoutubeTranscript(
+      url,
+      setError,
+      setIsLoading,
+      setYoutubeTranscript
+    );
+  };
 
   /**
    * Handles the markdown generation process for the Web tab.
@@ -126,11 +142,18 @@ export function FileTabs() {
           handleStructuredGenerate={handleStructured}
         />
       </TabsContent>
+      <TabsContent value="youtube">
+        <YoutubeTabContent
+          url={url}
+          setUrl={setUrl}
+          isLoading={isLoading}
+          error={error}
+          transcript={youtubeTranscript}
+          handleGenerate={handleYoutubeGenerate}
+        />
+      </TabsContent>
       <TabsContent value="audio">
         <div className="text-center">Audio tab coming soon...</div>
-      </TabsContent>
-      <TabsContent value="youtube">
-        <div className="text-center">Youtube tab coming soon...</div>
       </TabsContent>
     </Tabs>
   );
