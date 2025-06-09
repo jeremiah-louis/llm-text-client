@@ -21,11 +21,18 @@ export async function POST(request: Request) {
       collection_id,
     });
 
-    return NextResponse.json(response);
+    return NextResponse.json({
+      success: true,
+      collection_id,
+      ...response
+    });
   } catch (error) {
     console.error('Error creating collection:', error);
     return NextResponse.json(
-      { error: 'Failed to create collection' },
+      { 
+        success: false,
+        error: error instanceof Error ? error.message : 'Failed to create collection' 
+      },
       { status: 500 }
     );
   }

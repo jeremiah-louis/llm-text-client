@@ -1,10 +1,15 @@
 "use client";
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useCallback } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { WebTabContent } from "../tabs/WebTabContent";
 import { YoutubeTabContent } from "../tabs/YoutubeTabContent";
 import { triggerConfetti, handleGenerate as handleGenerateHelper, handleStructuredGenerate } from "@/lib/webTabHelpers";
 import { fetchYoutubeTranscript } from "@/lib/youtubeTabHelpers";
+
+type Message = {
+  role: 'user' | 'assistant';
+  content: string;
+};
 
 // Simple Toggle Switch
 function Toggle({
@@ -59,18 +64,125 @@ export function FileTabs() {
   const [structuredData, setStructuredData] = useState("");
   const [isStructuredLoading, setIsStructuredLoading] = useState(false);
   const [youtubeTranscript, setYoutubeTranscript] = useState("");
+  const [collectionId, setCollectionId] = useState<string | null>(null);
+  const [status, setStatus] = useState<string | null>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [isChatLoading, setIsChatLoading] = useState(false);
+
+  // Generate a random 60-character collection ID
+  const generateCollectionId = useCallback(() => {
+    return Array.from({ length: 60 }, () => 
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'[
+        Math.floor(Math.random() * 62)
+      ]
+    ).join('');
+  }, []);
+
+  // Handle chat message submission
+  const handleChatSubmit = async (query: string) => {
+    if (!collectionId) return;
+    
+    const userMessage: Message = { role: 'user', content: query };
+    setMessages(prev => [...prev, userMessage]);
+    setIsChatLoading(true);
+    
+    try {
+      const response = await fetch('/api/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          collection_id: collectionId,
+          request_query: query,
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to get response');
+      }
+      
+      const data = await response.json();
+      setMessages(prev => [...prev, { role: 'assistant', content: data.response || 'No response from assistant' }]);
+    } catch (error) {
+      console.error('Error querying collection:', error);
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: 'Sorry, there was an error processing your request.' 
+      }]);
+    } finally {
+      setIsChatLoading(false);
+    }
+  };
+
+  // Process YouTube video and create collection
+  const processYoutubeVideo = async (videoUrl: string) => {
+    setStatus('Creating collection...');
+    const newCollectionId = generateCollectionId();
+    
+    try {
+      // Create collection
+      const collectionResponse = await fetch('/api/collection', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ collection_id: newCollectionId }),
+      });
+      
+      if (!collectionResponse.ok) {
+        throw new Error('Failed to create collection');
+      }
+      
+      setCollectionId(newCollectionId);
+      setStatus('Processing video...');
+      
+      // Insert YouTube video
+      const insertResponse = await fetch('/api/insert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          collection_id: newCollectionId,
+          resource: videoUrl,
+          resource_type: 'youtube',
+        }),
+      });
+      
+      if (!insertResponse.ok) {
+        throw new Error('Failed to process video');
+      }
+      
+      setStatus('Video processed successfully');
+      setTimeout(() => setStatus(null), 2000);
+      
+    } catch (error) {
+      console.error('Error processing video:', error);
+      setError(error instanceof Error ? error.message : 'Failed to process video');
+      setStatus(null);
+    }
+  };
 
   /**
-   * Handles the YouTube transcript generation
+   * Handles the YouTube video processing
    */
   const handleYoutubeGenerate = async (e: FormEvent) => {
     e.preventDefault();
-    await fetchYoutubeTranscript(
-      url,
-      setError,
-      setIsLoading,
-      setYoutubeTranscript
-    );
+    setError(null);
+    setIsLoading(true);
+    
+    try {
+      // First get the transcript
+      await fetchYoutubeTranscript(
+        url,
+        setError,
+        setIsLoading,
+        setYoutubeTranscript
+      );
+      
+      // Then process the video for chat
+      await processYoutubeVideo(url);
+    } catch (error) {
+      console.error('Error in YouTube generation:', error);
+      setError('Failed to process YouTube video');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   /**
@@ -148,8 +260,13 @@ export function FileTabs() {
           setUrl={setUrl}
           isLoading={isLoading}
           error={error}
+          status={status || undefined}
           transcript={youtubeTranscript}
           handleGenerate={handleYoutubeGenerate}
+          collectionId={collectionId || undefined}
+          onChatSubmit={handleChatSubmit}
+          messages={messages}
+          isChatLoading={isChatLoading}
         />
       </TabsContent>
       <TabsContent value="audio">
