@@ -94,17 +94,17 @@ export function FileTabs() {
           className="w-full rounded-md border bg-background py-2 px-3 text-sm"
         >
           <option value="web">Web</option>
+          <option value="youtube">Youtube</option>
           <option value="files">Files & Images</option>
           <option value="audio">Audio</option>
-          <option value="youtube">Youtube</option>
         </select>
       </div>
       {/* Desktop tab list */}
       <TabsList className="hidden md:flex mb-4 py-7 gap-2">
         <TabsTrigger value="web">Web</TabsTrigger>
+        <TabsTrigger value="youtube">Youtube</TabsTrigger>
         <TabsTrigger value="files">Files & Images</TabsTrigger>
         <TabsTrigger value="audio">Audio</TabsTrigger>
-        <TabsTrigger value="youtube">Youtube</TabsTrigger>
       </TabsList>
       <TabsContent value="files">
         <div className="text-center text-gray-400 py-12 text-lg font-medium">Files & Images tab coming soon...</div>
