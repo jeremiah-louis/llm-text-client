@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import Wetrocloud from "wetro-sdk";
+import Wetrocloud from 'wetro-sdk';
 
-const wetrocloud = new Wetrocloud({ apiKey: process.env.WETRO_API_KEY || "" });
-export const maxDuration = 30;
+const wetrocloud = new Wetrocloud({ apiKey: process.env.WETRO_API_KEY || '' });
+
 export async function POST(request: Request) {
   try {
+    // Parse request body
     const { url } = await request.json();
-
     if (!url) {
       return NextResponse.json(
         { error: 'URL is required' },
@@ -14,24 +14,19 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!url) {
-      return NextResponse.json(
-        { error: 'URL is required' },
-        { status: 400 }
-      );
-    }
-
-    const response = await wetrocloud.transcript({
+    // Call the Wetrocloud API
+    const transcript = await wetrocloud.transcript({
       resource: url,
       resource_type: "youtube"
     });
 
-    return NextResponse.json({ data: response });
-
+    // Return the transcript
+    return NextResponse.json({ transcript });
+    
   } catch (error) {
-    console.error('Extraction error:', error);
+    console.error('Error in /api/youtube-transcript:', error);
     return NextResponse.json(
-      { error: 'Failed to extract structured data' },
+      { error: 'Failed to fetch transcript' },
       { status: 500 }
     );
   }
