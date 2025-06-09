@@ -17,6 +17,4 @@ export default async function POST(req: Request) {
 
   // Process streaming response
   return NextResponse.json(response);
-  
-
 }
