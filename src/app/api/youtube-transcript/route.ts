@@ -3,6 +3,8 @@ import Wetrocloud from 'wetro-sdk';
 
 const wetrocloud = new Wetrocloud({ apiKey: process.env.WETRO_API_KEY || '' });
 
+export const maxDuration = 60;
+
 export async function POST(request: Request) {
   try {
     // Parse request body
