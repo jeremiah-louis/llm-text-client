@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import Wetrocloud from "wetro-sdk";
 
+export const maxDuration = 60;
+
 // Initialize the Wetrocloud client
 const client = new Wetrocloud({
   apiKey: process.env.WETRO_API_KEY || "",
