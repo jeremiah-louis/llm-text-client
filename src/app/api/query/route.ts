@@ -6,6 +6,8 @@ const client = new Wetrocloud({
   apiKey: process.env.WETRO_API_KEY || "",
 });
 
+export const maxDuration = 30; // This function can run for a maximum of 5 seconds
+
 export async function POST(req: Request) {
   try {
     const { collection_id, request_query } = await req.json();
