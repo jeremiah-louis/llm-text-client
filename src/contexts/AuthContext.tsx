@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { AuthContextType } from '@/lib/interfaces';
 
@@ -13,6 +14,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [apiKey, setStoredApiKey] = useState<string | null>(null);
 
   /**
    * Checks the current authentication status by making an API call
@@ -23,9 +25,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await fetch('/api/check-auth');
       const data = await response.json();
       setIsAuthenticated(data.isAuthenticated);
+      setStoredApiKey(data.apiKey || null);
     } catch (err) {
       setError('Failed to check authentication status');
       setIsAuthenticated(false);
+      setStoredApiKey(null);
     } finally {
       setIsLoading(false);
     }
@@ -49,6 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw new Error(data.error || 'Failed to set API key');
       }
       setIsAuthenticated(true);
+      setStoredApiKey(apiKey);
     } catch (err: any) {
       setError(err.message);
       throw err;
@@ -68,6 +73,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         isAuthenticated,
         isLoading,
+        apiKey,
         setApiKey,
         checkAuthStatus,
         error,

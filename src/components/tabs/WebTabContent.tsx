@@ -14,18 +14,14 @@ import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { useCyclingMessage } from "../../hooks/useCyclingMessage";
 
 const structuredMessages = [
-  "🧠 Downloading braincells...",
-  "💅 Formatting that info real cute...",
-  "🛠️ Hacking into the matrix (legally)...",
-  "👾 Extracting stats like it's a speedrun...",
-  "👨‍🍳 Cooking up results...",
+  "Scraping the web...",
+  "Converting to Markdown...",
+  "Fetching results...",
 ];
 const unstructuredMessages = [
-  "🧠 Downloading braincells...",
-  "💅 Formatting that info real cute...",
-  "🛠️ Hacking into the matrix (legally)...",
-  "👾 Extracting stats like it's a speedrun...",
-  "👨‍🍳 Cooking up results...",
+  "Scraping the web...",
+  "Converting to Markdown...",
+  "Fetching results...",
 ];
 
 /**

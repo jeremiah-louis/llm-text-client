@@ -17,7 +17,7 @@ export function WetroButton({
       type="submit"
       disabled={isLoading}
       className={`
-        relative w-full sm:w-auto h-12 px-6 mt-3 text-base font-medium rounded-lg
+        relative h-12 px-6 mt-3 text-base font-medium rounded-lg
         transition-all duration-200 ease-out
         bg-gradient-to-r from-blue-600 to-blue-500
         dark:from-blue-500 dark:to-blue-400

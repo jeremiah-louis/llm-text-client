@@ -12,7 +12,7 @@ import {
  * FileTabs: Main tabbed interface for file, web, audio, and youtube content.
  * Delegates Web tab UI to WebTabContent and uses shared helpers for API interactions.
  */
-export function FileTabs() {
+export function PlaygroundTabs() {
   // Shared state for Web tab
   const [structured, setStructured] = useState(false);
   const [url, setUrl] = useState("");

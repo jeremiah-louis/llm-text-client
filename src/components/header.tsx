@@ -1,7 +1,11 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useAuth } from "@/hooks/useAuth";
+import { Avatar } from "@/components/Avatar";
 
 export default function Header() {
+  const { isAuthenticated, apiKey } = useAuth();
   return (
     <header className="w-full py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
@@ -23,6 +27,10 @@ export default function Header() {
             Wetrocloud
           </span>
         </Link>
+        
+        {isAuthenticated && apiKey && (
+          <Avatar apiKey={apiKey} />
+        )}
       </div>
     </header>
   );
