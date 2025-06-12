@@ -32,7 +32,7 @@ export default function Loading() {
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
           <motion.div
-            className="h-full bg-primary"
+            className="h-full bg-blue-500"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{

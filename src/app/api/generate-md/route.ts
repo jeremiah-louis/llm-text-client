@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to generate markdown' },
+      { error: error instanceof Error ? error.message : 'No content received from the server' },
       { status: 500 }
     );
   }
