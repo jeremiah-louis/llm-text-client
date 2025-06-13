@@ -21,18 +21,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
    */
   const checkAuthStatus = async () => {
     setIsLoading(true);
-    try {
-      const response = await fetch('/api/check-auth');
-      const data = await response.json();
-      setIsAuthenticated(data.isAuthenticated);
-      setStoredApiKey(data.apiKey || null);
-    } catch (err) {
-      setError('Failed to check authentication status');
-      setIsAuthenticated(false);
-      setStoredApiKey(null);
-    } finally {
-      setIsLoading(false);
-    }
+    setStoredApiKey(null);
+    setIsLoading(false);
   };
 
   /**
@@ -76,6 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         apiKey,
         setApiKey,
         checkAuthStatus,
+        setIsAuthenticated,
         error,
       }}
     >

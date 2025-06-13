@@ -41,9 +41,8 @@ export function getUserColor(apiKey: string): string {
  * Generates a random name based on the API key
  */
 export function getUserName(apiKey: string): string {
-  const hash = simpleHash(apiKey);
-  const name = NAMES[hash % NAMES.length];
-  return `${name}-${hash}`;
+  const name = localStorage.getItem('createdByUsername') || '';
+  return name;
 }
 
 /**
@@ -52,7 +51,7 @@ export function getUserName(apiKey: string): string {
 export function getUserAvatar(apiKey: string): { color: string; name: string; initials: string } {
   const color = getUserColor(apiKey);
   const name = getUserName(apiKey);
-  const initials = name.substring(0, 2).toUpperCase();
+  const initials = name.charAt(0).toUpperCase();
   
   return { color, name, initials };
 } 
