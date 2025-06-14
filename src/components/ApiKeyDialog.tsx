@@ -5,6 +5,8 @@ import { useApiClient } from '@/hooks/useApiClient';
 import { useDashboard } from '@/hooks/useDashboard';
 import { useAuth } from '@/contexts/AuthContext';
 
+const LOGIN_URL = process.env.NEXT_PUBLIC_CONSOLE_DASHBOARD_URL+'/auth?redirect='+process.env.NEXT_PUBLIC_BASE_URL;
+
 interface ApiKeyDialogProps {
   isOpen: boolean;
   onAuthenticated: () => void;
@@ -48,7 +50,15 @@ export function ApiKeyDialog({ isOpen, onAuthenticated, isEditing = false, curre
         }
       } catch (err: any) {
         if (isMounted) {
-          setError(err.message);
+          console.log(err);
+          console.log(err.message);
+          if(err.status === 401){
+            if (typeof window !== 'undefined') {
+              window.location.href = LOGIN_URL;
+          }
+          } else {
+            setError(err.message);
+          }
         }
       } finally {
         if (isMounted) {
@@ -62,7 +72,7 @@ export function ApiKeyDialog({ isOpen, onAuthenticated, isEditing = false, curre
     return () => {
       isMounted = false;
     };
-  }, [isOpen, getAPIKey, setApiKey, setIsAuthenticated, fetchWithAuth]);
+  }, []);
 
   return (
     <Dialog open={isOpen} onOpenChange={isEditing ? () => onAuthenticated() : () => {}}>

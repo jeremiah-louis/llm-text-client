@@ -5,7 +5,6 @@ axios.defaults.withCredentials = true;
 export function useDashboard() {
 
     const DASHBOARD_API_URL = process.env.NEXT_PUBLIC_API_DASHBOARD_URL;
-    const LOGIN_URL = process.env.NEXT_PUBLIC_CONSOLE_DASHBOARD_URL+'/auth?redirect='+process.env.NEXT_PUBLIC_BASE_URL;
 
     const getAccessToken = async () => {
         try {
@@ -17,15 +16,6 @@ export function useDashboard() {
             const data = await response.data;
             return data.data.access;
         } catch (error: any) {
-            if (error.response?.status === 401) {
-                // Redirect to login page if not in a server-side context
-                if (typeof window !== 'undefined') {
-                    window.location.href = LOGIN_URL;
-                }
-                // Return a rejected promise to stop further execution
-                return Promise.reject(new Error('Authentication required'));
-            }
-            // Re-throw other errors
             throw error;
         }
     };
