@@ -1,9 +1,11 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useApiClient } from '@/hooks/useApiClient';
 import { useDashboard } from '@/hooks/useDashboard';
 import { useAuth } from '@/contexts/AuthContext';
+import { WetroButton } from './ui/wetro-button';
+import { Input } from './ui/input';
 
 const LOGIN_URL = process.env.NEXT_PUBLIC_CONSOLE_DASHBOARD_URL+'/auth?redirect='+process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -20,38 +22,43 @@ export function ApiKeyDialog({ isOpen, onAuthenticated, isEditing = false, curre
   const { fetchWithAuth } = useApiClient();
   const { getAPIKey } = useDashboard();
   const { setIsAuthenticated, setApiKey } = useAuth();
+  const [apiKeyValue, setApiKeyValue] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
+  const handleSubmit = async (e: React.FormEvent | null, apiKeyValueFromServer: string | null = null) => {
+    e?.preventDefault();
+    try {
+      const response = await fetchWithAuth('/api/set-api-key', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ apiKey: apiKeyValue || apiKeyValueFromServer }),
+      });
+
+      if (!response.success) {
+        setErrorMessage('API key is not valid');
+        // throw new Error('API key is not valid');
+      }
+
+      setApiKey(apiKeyValue);
+      setIsAuthenticated(true);
+    } catch (err: any) {
+      setErrorMessage(err.message);
+    }
+  };
 
   useEffect(() => {
     if (!isOpen) return;
-    
     let isMounted = true;
-    
     const fetchAndSetApiKey = async () => {
       try {
         setIsLoading(true);
         const apiKey = await getAPIKey();
-        
+        setApiKeyValue(apiKey);
+
         if (!isMounted) return;
-        
-        const response = await fetchWithAuth('/api/set-api-key', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ apiKey }),
-        });
-        
-        if (!response.success) {
-          throw new Error('API key is not valid');
-        }
-        
-        if (isMounted) {
-          setApiKey(apiKey);
-          setIsAuthenticated(true);
-        }
+        await handleSubmit(null, apiKey);
       } catch (err: any) {
         if (isMounted) {
-          console.log(err);
-          console.log(err.message);
           if(err.status === 401){
             if (typeof window !== 'undefined') {
               window.location.href = LOGIN_URL;
@@ -76,7 +83,7 @@ export function ApiKeyDialog({ isOpen, onAuthenticated, isEditing = false, curre
 
   return (
     <Dialog open={isOpen} onOpenChange={isEditing ? () => onAuthenticated() : () => {}}>
-      <DialogContent className="sm:max-w-md flex items-center justify-center">
+      <DialogContent className="sm:max-w-md items-center justify-center">
         {(isLoading && !error) && (
           <div className="flex items-center justify-center space-x-2">
             <span className="tracking-tight">Please wait...</span>
@@ -84,9 +91,39 @@ export function ApiKeyDialog({ isOpen, onAuthenticated, isEditing = false, curre
         )}
         
         {error && (
-          <div className="flex items-center justify-center space-x-2">
-            <span className="tracking-tight text-red-600">An error occurred</span>
-          </div>  
+          <>
+            <DialogHeader>
+              <DialogTitle className="tracking-tight">
+                {isEditing ? 'Edit your Wetrocloud API Key' : 'Enter your Wetrocloud API Key'}
+              </DialogTitle>
+              <DialogDescription className="tracking-tight">
+                {isEditing ? 'Update your API Key' : 'Get your API Key from the'} 
+                {!isEditing && <a href="https://console.wetrocloud.com" target="_blank" rel="noopener noreferrer" className="underline"> Wetrocloud console</a>}
+              </DialogDescription>
+            </DialogHeader>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Input
+                  type="password"
+                  placeholder="wtc-..."
+                  value={apiKeyValue}
+                  onClick={() => setErrorMessage('')}
+                  onChange={(e) => setApiKeyValue(e.target.value)}
+                  disabled={isLoading}
+                />
+                <div className="tracking-tighter"style={{ color: 'red', fontSize: '0.95em' }}>{errorMessage}</div>
+              </div>
+              <WetroButton
+                type="submit"
+                isLoading={isLoading}
+                disabled={!apiKeyValue || isLoading}
+                className="tracking-tight w-full"
+              >
+                {isEditing ? 'Update' : 'Submit'}
+              </WetroButton>
+
+            </form>
+          </>
         )}
       </DialogContent>
     </Dialog>
