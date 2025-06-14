@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
     }
     // Use apiKey from cookie
     const client = new Wetrocloud({ apiKey });
+    console.log(apiKey)
     const response = await client.markDownConverter({
       resource: link,
       resource_type: 'web'

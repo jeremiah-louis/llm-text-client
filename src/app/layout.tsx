@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://wetrocloud.com'),
   title: {
-    default: "Wetrocloud Playground",
+    default: "Wetrocloud Playground | LLM ready data",
     template: "%s | Wetrocloud"
   },
   description: "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://wetrocloud.com",
-    title: "URL to Markdown | Wetrocloud Playground",
+    title: "Wetrocloud Playground | LLM ready data",
     description: "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
     siteName: "Wetrocloud",
     images: [{
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "URL to Markdown | Wetrocloud Playground",
+    title: "Wetrocloud Playground | LLM ready data",
     description: "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
     images: ["/og-image.png"],
     creator: "@wetrocloud",
@@ -106,7 +106,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
         {/* Twitter OG metadata */}
-        <meta property="twitter:title" content="URL to Markdown | Wetrocloud" />
+        <meta property="twitter:title" content="Wetrocloud Playground | LLM ready data" />
         <meta property="twitter:description" content="Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing." />
         <meta property="twitter:image" content="https://playground.wetrocloud.com/og-image.png" />
         <meta name="twitter:image:summary_photo_image:src" content="https://playground.wetrocloud.com/og-image.png"/>
@@ -120,7 +120,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebApplication",
-              "name": "URL to Markdown | Wetrocloud",
+              "name": "Wetrocloud Playground | LLM ready data",
               "description": "Convert any webpage into clean, formatted Markdown with one click. Powered by Wetrocloud's advanced text processing.",
               "url": "https://wetrocloud.com",
               "applicationCategory": "Utility",

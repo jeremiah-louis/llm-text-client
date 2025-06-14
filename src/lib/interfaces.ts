@@ -7,5 +7,6 @@ export interface AuthContextType {
   apiKey: string | null;
   setApiKey: (apiKey: string) => Promise<void>;
   checkAuthStatus: () => Promise<void>;
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
   error: string | null;
 } 
