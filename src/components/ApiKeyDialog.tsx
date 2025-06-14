@@ -27,19 +27,20 @@ export function ApiKeyDialog({ isOpen, onAuthenticated, isEditing = false, curre
 
   const handleSubmit = async (e: React.FormEvent | null, apiKeyValueFromServer: string | null = null) => {
     e?.preventDefault();
+
+    const currentApiKey : string = apiKeyValue || apiKeyValueFromServer || '';
     try {
       const response = await fetchWithAuth('/api/set-api-key', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ apiKey: apiKeyValue || apiKeyValueFromServer }),
+        body: JSON.stringify({ apiKey: currentApiKey }),
       });
 
       if (!response.success) {
         setErrorMessage('API key is not valid');
-        // throw new Error('API key is not valid');
       }
 
-      setApiKey(apiKeyValue);
+      setApiKey(currentApiKey);
       setIsAuthenticated(true);
     } catch (err: any) {
       setErrorMessage(err.message);
