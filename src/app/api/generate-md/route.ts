@@ -1,6 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server';
 import Wetrocloud from 'wetro-sdk';
 
+export const maxDuration = 30;
+
 export async function POST(request: NextRequest) {
   // Get API key from cookie
   const apiKey = request.cookies.get('wetro-api-key')?.value;
