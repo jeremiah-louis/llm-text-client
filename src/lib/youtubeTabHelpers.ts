@@ -24,14 +24,15 @@ export function extractVideoId(url: string): string | null {
     }
     
     if (urlObj.hostname === 'www.youtube.com' || urlObj.hostname === 'youtube.com') {
+      const shortsMatch = url.match(/\/shorts\/([^?&]+)/);
+      if (shortsMatch && shortsMatch[1]) return shortsMatch[1];
       return urlObj.searchParams.get('v');
     }
+    return null;
   } catch (e) {
     console.error('Error extracting video ID:', e);
     return null;
   }
-  
-  return null;
 }
 
 /**
@@ -43,6 +44,8 @@ export function isValidYoutubeUrl(url: string): boolean {
   try {
     // Check if we can extract a video ID
     const videoId = extractVideoId(url);
+
+    console.log('Extracted video ID:', videoId);
     if (!videoId) return false;
     
     // Additional check to ensure the video ID format is valid
